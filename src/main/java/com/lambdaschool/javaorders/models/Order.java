@@ -1,4 +1,6 @@
 package com.lambdaschool.javaorders.models;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,8 +16,10 @@ public class Order
     private String orderdescription;
     @ManyToOne
     @JoinColumn(name = "custcode", nullable = false)
+    @JsonIgnoreProperties(value = "order")
     private Customer customer;
     @ManyToMany
+    @JsonIgnoreProperties(value = "order")
     @JoinTable(name = "orderspayments",
             joinColumns = @JoinColumn(name = "ordnum"),
             inverseJoinColumns = @JoinColumn(name = "paymentid"))
@@ -36,55 +40,59 @@ public class Order
         this.orderdescription = orderdescription;
     }
     // Getters and Setters
-    public long getOrdnum()
-    {
+
+
+    public long getOrdnum() {
         return ordnum;
     }
-    public void setOrdnum(long ordernum)
-    {
+
+    public void setOrdnum(long ordnum) {
         this.ordnum = ordnum;
     }
-    public double getOrdamount()
-    {
+
+    public double getOrdamount() {
         return ordamount;
     }
-    public void setOrdamount(double ordamount)
-    {
+
+    public void setOrdamount(double ordamount) {
         this.ordamount = ordamount;
     }
-    public double getAdvanceamount()
-    {
+
+    public double getAdvanceamount() {
         return advanceamount;
     }
-    public void setAdvanceamount(double advanceamount)
-    {
+
+    public void setAdvanceamount(double advanceamount) {
         this.advanceamount = advanceamount;
     }
-    public String getOrderdescription()
-    {
+
+    public String getOrderdescription() {
         return orderdescription;
     }
-    public void setOrderdescription(String orderdescription)
-    {
+
+    public void setOrderdescription(String orderdescription) {
         this.orderdescription = orderdescription;
     }
-    public Customer getCustomer()
-    {
+
+    public Customer getCustomer() {
         return customer;
     }
-    public void setCustomer(Customer customer)
-    {
+
+    public void setCustomer(Customer customer) {
         this.customer = customer;
     }
-    public Set<Payment> getPayments()
-    {
+
+    public Set<Payment> getPayments() {
         return payments;
     }
-    public void setPayments(Set<Payment> payments)
-    {
+
+    public void setPayments(Set<Payment> payments) {
         this.payments = payments;
     }
-    public void addPayments(Payment type)
+    public void addPayments(Payment payment)
     {
+        payments.add(payment);
+        payment.getOrder().add(this);
     }
+
 }

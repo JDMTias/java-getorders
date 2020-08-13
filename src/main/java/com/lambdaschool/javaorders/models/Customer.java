@@ -1,4 +1,6 @@
 package com.lambdaschool.javaorders.models;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +24,10 @@ public class Customer
     private String phone;
     @ManyToOne
     @JoinColumn(name = "agentcode", nullable = false)
+    @JsonIgnoreProperties(value = "customers")
     private Agent agent;
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties(value = "customer")
     private List<Order> orders = new ArrayList<>();
     // Constructors
     public Customer()
@@ -55,92 +59,108 @@ public class Customer
         this.agent = agent;
     }
     // Getters and Setters
-    public long getCustcode()
-    {
+
+    public long getCustcode() {
         return custcode;
     }
-    public void setCustcode(long custcode)
-    {
+
+    public void setCustcode(long custcode) {
         this.custcode = custcode;
     }
-    public String getCustname()
-    {
+
+    public String getCustname() {
         return custname;
     }
-    public void setCustname(String custname)
-    {
+
+    public void setCustname(String custname) {
         this.custname = custname;
     }
-    public String getCustcity()
-    {
+
+    public String getCustcity() {
         return custcity;
     }
-    public void setCustcity(String custcity)
-    {
+
+    public void setCustcity(String custcity) {
         this.custcity = custcity;
     }
-    public String getWorkingarea()
-    {
+
+    public String getWorkingarea() {
         return workingarea;
     }
-    public void setWorkingarea(String workingarea)
-    {
+
+    public void setWorkingarea(String workingarea) {
         this.workingarea = workingarea;
     }
-    public String getCustcountry()
-    {
+
+    public String getCustcountry() {
         return custcountry;
     }
-    public void setCustcountry(String custcountry)
-    {
+
+    public void setCustcountry(String custcountry) {
         this.custcountry = custcountry;
     }
-    public String getGrade()
-    {
+
+    public String getGrade() {
         return grade;
     }
-    public void setGrade(String grade)
-    {
+
+    public void setGrade(String grade) {
         this.grade = grade;
     }
-    public double getOpeningamt()
-    {
+
+    public double getOpeningamt() {
         return openingamt;
     }
-    public void setOpeningamt(double openingamt)
-    {
+
+    public void setOpeningamt(double openingamt) {
         this.openingamt = openingamt;
     }
-    public double getReceiveamt()
-    {
+
+    public double getReceiveamt() {
         return receiveamt;
     }
-    public void setReceiveamt(double receiveamt)
-    {
+
+    public void setReceiveamt(double receiveamt) {
         this.receiveamt = receiveamt;
     }
-    public double getPaymentamt()
-    {
+
+    public double getPaymentamt() {
         return paymentamt;
     }
-    public void setPaymentamt(double paymentamt)
-    {
+
+    public void setPaymentamt(double paymentamt) {
         this.paymentamt = paymentamt;
     }
-    public double getOutstandingamt()
-    {
+
+    public double getOutstandingamt() {
         return outstandingamt;
     }
-    public void setOutstandingamt(double outstandingamt)
-    {
+
+    public void setOutstandingamt(double outstandingamt) {
         this.outstandingamt = outstandingamt;
     }
-    public String getPhone()
-    {
+
+    public String getPhone() {
         return phone;
     }
-    public void setPhone(String phone)
-    {
+
+    public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public Agent getAgent() {
+        return agent;
+    }
+
+    public void setAgent(Agent agent) {
+        this.agent = agent;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }
