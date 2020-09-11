@@ -9,7 +9,8 @@ A student that completes this project shows that they can:
 
 ## Introduction
 
-This is a basic database scheme with customers, orders, and sales agents. This Java Spring REST API application will provide endpoints for clients to read various data sets contained in the application's data.
+This is a basic database scheme with customers, orders, and sales agents. This Java Spring REST
+ API application will provide endpoints for clients to read various data sets contained in the application's data.
 
 This is Part 2 of a 3 Part project.
 
