@@ -1,24 +1,19 @@
 package com.lambdaschool.getorders2.models;
-
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.function.DoubleBinaryOperator;
-
 @Entity
 @Table(name = "orders")
-public class Order {
-
+public class Order
+{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long ordnum;
+    private long ordnum; // primary key
     private double ordamount;
     private double advanceamount;
     private String orderdescription;
-
     @ManyToOne
     @JoinColumn(name = "custcode", nullable = false)
     @JsonIgnoreProperties(value = "order")
@@ -26,23 +21,26 @@ public class Order {
     @ManyToMany
     @JsonIgnoreProperties(value = "order")
     @JoinTable(name = "orderspayments",
-                joinColumns = @JoinColumn(name = "ordnum"),
-                inverseJoinColumns = @JoinColumn(name = "paymentid"))
+            joinColumns = @JoinColumn(name = "ordnum"),
+            inverseJoinColumns = @JoinColumn(name = "paymentid"))
     private Set<Payment> payments = new HashSet<>();
-
-    public Order() {
+    // Constructors
+    public Order()
+    {
     }
-
-    public Order(double ordamount, double advanceamount,
-                 String orderdescription, Customer customer,
-                 Set<Payment> payments) {
-
+    public Order(
+            double ordamount,
+            double advanceamount,
+            Customer customer,
+            String orderdescription)
+    {
         this.ordamount = ordamount;
         this.advanceamount = advanceamount;
-        this.orderdescription = orderdescription;
         this.customer = customer;
-        this.payments = payments;
+        this.orderdescription = orderdescription;
     }
+    // Getters and Setters
+
 
     public long getOrdnum() {
         return ordnum;
@@ -91,9 +89,10 @@ public class Order {
     public void setPayments(Set<Payment> payments) {
         this.payments = payments;
     }
-
-    public void addPayments(Payment payment) {
+    public void addPayments(Payment payment)
+    {
         payments.add(payment);
         payment.getOrder().add(this);
     }
+
 }

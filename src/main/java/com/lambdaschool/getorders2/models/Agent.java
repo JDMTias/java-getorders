@@ -1,7 +1,6 @@
 package com.lambdaschool.getorders2.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.apache.catalina.LifecycleState;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -9,18 +8,15 @@ import java.util.List;
 
 @Entity
 @Table(name = "agents")
-
 public class Agent {
-//    automating the ID
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-//    agent can't be null
     @Column(nullable = false)
     private long agentcode;
-//    add fields
+
     private String agentname;
     private String workingarea;
-    private double comission;
+    private double commission;
     private String phone;
     private String country;
 
@@ -28,26 +24,23 @@ public class Agent {
     @JsonIgnoreProperties(value = "agent")
     private List<Customer> customers = new ArrayList<>();
 
-//    need an empty contractor
     public Agent() {
     }
 
-//  make constructor with all the necessary fields
-    public Agent( String agentname, String workingarea, double comission, String phone,
-                  String country) {
-//        i think im missing  id = agentcode here?
+    public Agent(String agentname, String workingarea, double commission, String phone,
+                 String country) {
         this.agentname = agentname;
         this.workingarea = workingarea;
-        this.comission = comission;
+        this.commission = commission;
         this.phone = phone;
         this.country = country;
+
     }
 
-//    setters and getters
     public long getAgentcode() {
         return agentcode;
     }
-// i think this is supposed to be commented out
+
     public void setAgentcode(long agentcode) {
         this.agentcode = agentcode;
     }
@@ -68,12 +61,12 @@ public class Agent {
         this.workingarea = workingarea;
     }
 
-    public double getComission() {
-        return comission;
+    public double getCommision() {
+        return commission;
     }
 
-    public void setComission(double comission) {
-        this.comission = comission;
+    public void setCommision(double commision) {
+        this.commission = commision;
     }
 
     public String getPhone() {

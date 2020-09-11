@@ -1,20 +1,18 @@
 package com.lambdaschool.getorders2.models;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
 @Entity
 @Table(name = "customers")
-public class Customer {
+public class Customer
+{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(nullable = false)
     private long custcode;
     @Column(nullable = false)
     private String custname;
-
     private String custcity;
     private String workingarea;
     private String custcountry;
@@ -24,27 +22,30 @@ public class Customer {
     private double paymentamt;
     private double outstandingamt;
     private String phone;
-
     @ManyToOne
     @JoinColumn(name = "agentcode", nullable = false)
     @JsonIgnoreProperties(value = "customers")
-
     private Agent agent;
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties(value = "customer")
     private List<Order> orders = new ArrayList<>();
-
-    public Customer() {
+    // Constructors
+    public Customer()
+    {
     }
-
-    public Customer(String custname,
-                    String custcity, String workingarea,
-                    String custcountry, String grade,
-                    double openingamt, double receiveamt,
-                    double paymentamt, double outstandingamt,
-                    String phone, Agent agent,
-                    List<Order> orders) {
-
+    public Customer(
+            String custname,
+            String custcity,
+            String workingarea,
+            String custcountry,
+            String grade,
+            double openingamt,
+            double receiveamt,
+            double paymentamt,
+            double outstandingamt,
+            String phone,
+            Agent agent)
+    {
         this.custname = custname;
         this.custcity = custcity;
         this.workingarea = workingarea;
@@ -56,8 +57,8 @@ public class Customer {
         this.outstandingamt = outstandingamt;
         this.phone = phone;
         this.agent = agent;
-        this.orders = orders;
     }
+    // Getters and Setters
 
     public long getCustcode() {
         return custcode;
